@@ -145,4 +145,26 @@ class Pawn(Piece):
         return "P" + super().__str__()
 
     def moves(self):
-        pass
+        moves = []
+
+        if self.side == "White":
+            coord = Coordinate.create_from_number(self.loc.column, self.loc.row + 1)
+            if coord and not coord.equals(self.loc):
+                moves.append(coord)
+
+            if self.loc.row == 1:
+                coord = Coordinate.create_from_number(self.loc.column, self.loc.row + 2)
+                if coord and not coord.equals(self.loc):
+                    moves.append(coord)
+
+        if self.side == "Black":
+            coord = Coordinate.create_from_number(self.loc.column, self.loc.row -1)
+            if coord and not coord.equals(self.loc):
+                moves.append(coord)
+
+            if self.loc.row == 6:
+                coord = Coordinate.create_from_number(self.loc.column, self.loc.row - 2)
+                if coord and not coord.equals(self.loc):
+                    moves.append(coord)
+
+        return moves
